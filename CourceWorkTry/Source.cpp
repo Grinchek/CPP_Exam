@@ -1,22 +1,32 @@
-#include"Clock.h"
-#include"Helloes.h"
-#include"Func.h"
-#include <Windows.h>
 #include<iostream>
+#include <Windows.h>
 #include<string>
 #include<fstream>
+#include "Todo.h"
+#include"Helloes.h"
+#include"Clock.h"
 
 using namespace std;
 
-void main() {
+void GetInfo(Todo*&, int&);
+void WriteInfo(Todo*&, int&);
+
+int main() {
+	
+	Todo todo;
+	fstream file;
+	int size = 0;
+	Todo* todolist = nullptr;
+	GetInfo(todolist,size);
 	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	HELLO();
 	system("pause");
 	system("cls");
-	Todo* todolist = nullptr;
-	int size = 0;
+	
+	
 	int index = 0;
-	GetInfo(todolist, size);
+	
+	
 	bool exit = false;
 	while (!exit) {
 		system("cls");
@@ -36,7 +46,7 @@ void main() {
 		cin.ignore();
 		switch (choice) {
 		case 1: {
-			AddTodo(todolist, size);
+			todo.AddTodo(todolist, size);
 			break;
 		}
 		case 2: {
@@ -58,17 +68,17 @@ void main() {
 				cin.ignore();
 				switch (showChoice) {
 				case 1: {
-					SearchByDate(todolist, size);
+					todo.SearchByDate(todolist, size);
 				}
 					  break;
 				case 2: {
-					SortByDate(todolist, size);
-					SearchByPriority(todolist, size);
+					todo.SortByDate(todolist, size);
+					todo.SearchByPriority(todolist, size);
 				}
 					  break;
 				case 3: {
-					SortByPriority(todolist, size);
-					ShowInfo(todolist, size);
+					todo.SortByPriority(todolist, size);
+					todo.ShowInfo(todolist, size);
 				}
 					  break;
 				case 0: {
@@ -94,13 +104,14 @@ void main() {
 				for (int i = 0; i < size; i++) {
 					if (redTask == todolist[i].task) {
 						index = i;
-						EditTodo(todolist, size, index);
+						todo.EditTodo(todolist, size, index);
 					}
 					else {
 						cout << "Wrong task entered" << endl;
 					}
 				}
 			}
+			WriteInfo(todolist, size);
 			break;
 		}
 		case 4: {
@@ -113,7 +124,7 @@ void main() {
 				system("pause");
 			}
 			else if (size == 1) {
-				DeleteTodo(todolist, size, 0);
+				todo.DeleteTodo(todolist, size, 0);
 				file.open("Todolist", std::ofstream::out);
 				file.close();
 			}
@@ -125,7 +136,7 @@ void main() {
 				for (int i = 0; i < size; i++) {
 					if (delTask == todolist[i].task) {
 						index = i;
-						DeleteTodo(todolist, size, index);
+						todo.DeleteTodo(todolist, size, index);
 						file.open("Todolist", std::ofstream::out);
 						file.close();
 						WriteInfo(todolist, size);
@@ -151,4 +162,51 @@ void main() {
 	}
 	delete[] todolist;
 
+	return 0;
+
+}
+
+//Function for geting info from fil and put it on dynamic array
+void GetInfo(Todo*& todolist, int& size) {
+	fstream file;
+	file.open("Todolist", ios_base::in);
+	if (file.is_open()) {
+		string line;
+		int count = 0;
+		while (getline(file, line)) {
+			count++;
+			size = count / 5;
+		}
+
+		Todo* todolist = new Todo[size];
+		file.clear();
+		file.seekg(0, ios::beg);
+		int i = 0;
+		while (i < size) {
+			getline(file, todolist[i].task);
+			getline(file, todolist[i].description);
+			getline(file, todolist[i].date_todo);
+			getline(file, todolist[i].time_todo);
+			getline(file, todolist[i].priority);
+			i++;
+		}
+	}
+	file.close();
+}
+//Function for writing info into file
+void WriteInfo(Todo*& todolist, int& size) {
+	fstream file;
+	file.open("Todolist", ios_base::trunc);
+	file.close();
+	file.open("Todolist", ios_base::app);
+	if (file.is_open()) {
+		for (int i = 0; i < size; i++) {
+			file << todolist[i].task << "\n";
+			file << todolist[i].description << "\n";
+			file << todolist[i].date_todo << "\n";
+			file << todolist[i].time_todo << "\n";
+			file << todolist[i].priority << "\n";
+		}
+	}
+	file.close();
 }
