@@ -12,21 +12,18 @@ void GetInfo(Todo*&, int&);
 void WriteInfo(Todo*&, int&);
 
 int main() {
-	
+
 	Todo todo;
 	fstream file;
 	int size = 0;
 	Todo* todolist = nullptr;
-	GetInfo(todolist,size);
+	GetInfo(todolist, size);
 	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	HELLO();
 	system("pause");
 	system("cls");
-	
-	
 	int index = 0;
-	
-	
+	GetInfo(todolist, size);
 	bool exit = false;
 	while (!exit) {
 		system("cls");
@@ -47,11 +44,14 @@ int main() {
 		switch (choice) {
 		case 1: {
 			todo.AddTodo(todolist, size);
+			WriteInfo(todolist, size);
 			break;
 		}
 		case 2: {
 			if (size == 0) {
+				SetConsoleTextAttribute(hConsole, 9);
 				cout << "There are no todo yet" << endl;
+				SetConsoleTextAttribute(hConsole, 6);
 				system("pause");
 			}
 			else {
@@ -111,7 +111,6 @@ int main() {
 					}
 				}
 			}
-			WriteInfo(todolist, size);
 			break;
 		}
 		case 4: {
@@ -146,7 +145,6 @@ int main() {
 					}
 				}
 			}
-			WriteInfo(todolist, size);
 			break;
 		}
 		case 0: {
@@ -162,8 +160,6 @@ int main() {
 	}
 	delete[] todolist;
 
-	return 0;
-
 }
 
 //Function for geting info from fil and put it on dynamic array
@@ -175,12 +171,11 @@ void GetInfo(Todo*& todolist, int& size) {
 		int count = 0;
 		while (getline(file, line)) {
 			count++;
-			size = count / 5;
 		}
-
-		Todo* todolist = new Todo[size];
+		size = count / 5;
 		file.clear();
 		file.seekg(0, ios::beg);
+		todolist = new Todo[size];
 		int i = 0;
 		while (i < size) {
 			getline(file, todolist[i].task);

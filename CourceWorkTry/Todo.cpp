@@ -10,9 +10,11 @@ Todo* todolist = nullptr;
 
 //Function for create/add task
 void Todo::AddTodo(Todo*& todolist, int& size) {
+	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	fstream file;
 	Todo todo;
 	system("cls");
+	SetConsoleTextAttribute(hConsole, 9);
 	cout << "Enter a name of your to-do: ";
 	getline(cin, todo.task);
 	file.open("Todolist", ios_base::app);
@@ -23,6 +25,7 @@ void Todo::AddTodo(Todo*& todolist, int& size) {
 	cout << "Enter a date(YY:MM:DD): ";
 	getline(cin, todo.date_todo);
 	file << todo.date_todo << "\n";
+	SetConsoleTextAttribute(hConsole, 6);
 	cout << "Enter a time(HH:MM): ";
 	getline(cin, todo.time_todo);
 	file << todo.date_todo << "\n";
@@ -32,6 +35,7 @@ void Todo::AddTodo(Todo*& todolist, int& size) {
 	file.close();
 	system("pause");
 	size++;
+	SetConsoleTextAttribute(hConsole, 7);
 	Todo* temp = new Todo[size];
 	for (int i = 0; i < size - 1; i++) {
 		temp[i] = todolist[i];
