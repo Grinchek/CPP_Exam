@@ -14,9 +14,20 @@ void Todo::AddTodo(Todo*& todolist, int& size) {
 	fstream file;
 	Todo todo;
 	system("cls");
-	SetConsoleTextAttribute(hConsole, 9);
-	cout << "Enter a name of your to-do: ";
-	getline(cin, todo.task);
+		SetConsoleTextAttribute(hConsole, 9);
+		for (int j = 0; j < 1;) {
+			cout << "Enter a name of your to-do: ";
+			getline(cin, todo.task);
+			for (int i = 0; i < size; i++) {
+				if (todo.task == todolist[i].task) {
+					cout << "This task already exsit." << endl;
+					
+				}
+				else {
+					break;
+				}
+			}
+		}
 	file.open("Todolist", ios_base::app);
 	file << todo.task << "\n";
 	cout << "Discribe your todo: ";

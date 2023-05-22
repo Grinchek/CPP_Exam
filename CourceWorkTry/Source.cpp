@@ -10,6 +10,7 @@ using namespace std;
 
 void GetInfo(Todo*&, int&);
 void WriteInfo(Todo*&, int&);
+//int Unic(Todo*&, int&);
 
 int main() {
 
@@ -44,7 +45,7 @@ int main() {
 		switch (choice) {
 		case 1: {
 			todo.AddTodo(todolist, size);
-			WriteInfo(todolist, size);
+			//WriteInfo(todolist, size);
 			break;
 		}
 		case 2: {
@@ -157,12 +158,12 @@ int main() {
 			cout << "Invalid choice. Try again." << endl;
 			break;
 		}
+		
 	}
 	delete[] todolist;
-
 }
 
-//Function for geting info from fil and put it on dynamic array
+//Function for geting info from file and put it on dynamic array
 void GetInfo(Todo*& todolist, int& size) {
 	fstream file;
 	file.open("Todolist", ios_base::in);
@@ -205,3 +206,17 @@ void WriteInfo(Todo*& todolist, int& size) {
 	}
 	file.close();
 }
+//function for checking tasks by unic name;
+//int Unic(Todo*& todolist, int& size) {
+//	for (int i = 0; i < size-1;i++) {
+//		if (todolist[i].task == todolist[i + 1].task) {
+//			return 1;
+//		}
+//		else {
+//			return 0;
+//		}
+//	}
+//
+//
+//
+//}
