@@ -16,7 +16,7 @@ void Todo::AddTodo(Todo*& todolist, int& size) {
 	system("cls");
 		SetConsoleTextAttribute(hConsole, 9);
 		bool quit = false;
-		while (quit == false) {
+		while (!quit) {
 			cout << "Enter a name of your to-do: ";
 			getline(cin, todo.task);
 			if (size > 0) {
@@ -30,6 +30,10 @@ void Todo::AddTodo(Todo*& todolist, int& size) {
 				if (similar == 0) {
 					quit = true;
 				}
+
+			}
+			else if (size < 1) {
+				quit = true;
 			}
 
 		}
