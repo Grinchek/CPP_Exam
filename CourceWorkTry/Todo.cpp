@@ -16,7 +16,7 @@ void Todo::AddTodo(Todo*& todolist, int& size) {
 	system("cls");
 		SetConsoleTextAttribute(hConsole, 9);
 		bool quit = false;
-		while (!quit) {
+		while (!quit) { 
 			cout << "Enter a name of your to-do: ";
 			getline(cin, todo.task);
 			if (size > 0) {
