@@ -15,18 +15,23 @@ void Todo::AddTodo(Todo*& todolist, int& size) {
 	Todo todo;
 	system("cls");
 		SetConsoleTextAttribute(hConsole, 9);
-		for (int j = 0; j < 1;) {
+		bool quit = false;
+		while (quit == false) {
 			cout << "Enter a name of your to-do: ";
 			getline(cin, todo.task);
-			for (int i = 0; i < size; i++) {
-				if (todo.task == todolist[i].task) {
-					cout << "This task already exsit." << endl;
-					
+			if (size > 0) {
+				int similar = 0;
+				for (int i = 0; i < size; i++) {
+					if (todo.task == todolist[i].task) {
+						cout << "This task already exist." << endl;
+						similar++;
+					}
 				}
-				else {
-					break;
+				if (similar == 0) {
+					quit = true;
 				}
 			}
+
 		}
 	file.open("Todolist", ios_base::app);
 	file << todo.task << "\n";
