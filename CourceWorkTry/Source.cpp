@@ -112,6 +112,7 @@ int main() {
 					}
 				}
 			}
+			WriteInfo(todolist, size);
 			break;
 		}
 		case 4: {

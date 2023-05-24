@@ -95,8 +95,23 @@ int Todo::EditTodo(Todo*& todolist, int& size, int index) {
 	cin.ignore();
 	switch (editchoise) {
 	case 1: {
-		cout << "Enter task's new name: " << endl;
-		getline(cin, todolist[index].task);
+		Todo todo;
+		bool quit = false;
+		while (!quit) {
+			cout << "Enter task's new name: " << endl;
+			getline(cin, todo.task);
+				int similar = 0;
+				for (int i = 0; i < size; i++) {
+					if (todo.task == todolist[i].task) {
+						cout << "This task already exist." << endl;
+						similar++;
+					}
+				}
+				if (similar == 0) {
+					todolist[index].task = todo.task;
+					quit = true;
+				}
+		}
 		break;
 	}
 	case 2: {
