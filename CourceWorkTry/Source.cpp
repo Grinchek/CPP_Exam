@@ -45,7 +45,6 @@ int main() {
 		switch (choice) {
 		case 1: {
 			todo.AddTodo(todolist, size);
-			//WriteInfo(todolist, size);
 			break;
 		}
 		case 2: {

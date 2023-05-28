@@ -2,11 +2,7 @@
 >Do you have an important task, but are not sure you will remember it?
 > Just write it down in a convenient and concise to-do list.
 ## Installation
-
-
-Windows:
-sh
-edit autoexec.bat
+Download from my repository in GitHub
 
 ## Usage example
 The to-do list can be used for helping you remeber all things 
