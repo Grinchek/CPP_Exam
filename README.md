@@ -7,12 +7,18 @@ Download from my repository in GitHub
 ## Usage example
 The to-do list can be used for helping you remeber all things 
 and tasks you nead to do or remember.
+In the app you can create and add tasks to do.
+Allso you can edit every field of wanted to edit task.
+You may check the simple date and time as well.
+Deleting function is present too.
+If you will have a lot of tasks, you able to watch your taks by priority
+or date to do.
 ## Development setup
 You can just open an exe file on your OS Windows, or use sourse code
-for compile uplication on your own computer with another OS.
+for compile application on your own computer with another OS.
 ## Release History
 
 * 0.0.1
 ## Meta
-Your Name – [Grinchek]() – YourEmail warning686@gmail.com
+[Ivan Hryn]() –  warning686@gmail.com
 [https://github.com/Grinchek]
