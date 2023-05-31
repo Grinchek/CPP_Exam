@@ -107,7 +107,7 @@ int main() {
 						todo.EditTodo(todolist, size, index);
 					}
 					else {
-						cout << "Wrong task entered" << endl;
+						
 					}
 				}
 			}
